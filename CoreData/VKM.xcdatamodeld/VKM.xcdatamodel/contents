@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="CAttachment" representedClassName="CAttachment" syncable="YES">
+        <attribute name="aid" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="position" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="src" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="message" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CMessage" inverseName="attachments" inverseEntity="CMessage" syncable="YES"/>
+    </entity>
+    <entity name="CChat" representedClassName="CChat" syncable="YES">
+        <attribute name="cid" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="usersCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="admin" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="CUser" inverseName="adminOfChats" inverseEntity="CUser" syncable="YES"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="CUser" inverseName="memberOfChats" inverseEntity="CUser" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CMessage" inverseName="chat" inverseEntity="CMessage" syncable="YES"/>
+    </entity>
+    <entity name="CFavorites" representedClassName="CFavorites" syncable="YES">
+        <attribute name="nameFirst" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameLast" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="CFriendRequest" representedClassName="CFriendRequest" syncable="YES">
+        <attribute name="nameFirst" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameLast" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="processed" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="CFriendSuggestion" representedClassName="CFriendSuggestion" syncable="YES">
+        <attribute name="nameFirst" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameLast" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="processed" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="CMessage" representedClassName="CMessage" syncable="YES">
+        <attribute name="attachmentType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="from_id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="latest" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="mid" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="read" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="attachments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CAttachment" inverseName="message" inverseEntity="CAttachment" syncable="YES"/>
+        <relationship name="chat" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CChat" inverseName="messages" inverseEntity="CChat" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CUser" inverseName="messages" inverseEntity="CUser" syncable="YES"/>
+    </entity>
+    <entity name="CUser" representedClassName="CUser" syncable="YES">
+        <attribute name="friend" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="nameFirst" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameLast" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="online" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="adminOfChats" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CChat" inverseName="admin" inverseEntity="CChat" syncable="YES"/>
+        <relationship name="memberOfChats" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CChat" inverseName="members" inverseEntity="CChat" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CMessage" inverseName="user" inverseEntity="CMessage" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CAttachment" positionX="189" positionY="162" width="128" height="135"/>
+        <element name="CChat" positionX="-81" positionY="486" width="128" height="135"/>
+        <element name="CFriendRequest" positionX="261" positionY="465" width="128" height="120"/>
+        <element name="CFriendSuggestion" positionX="412" positionY="465" width="128" height="120"/>
+        <element name="CMessage" positionX="385" positionY="195" width="128" height="195"/>
+        <element name="CUser" positionX="-54" positionY="171" width="128" height="180"/>
+        <element name="CFavorites" positionX="160" positionY="192" width="128" height="90"/>
+    </elements>
+</model>
